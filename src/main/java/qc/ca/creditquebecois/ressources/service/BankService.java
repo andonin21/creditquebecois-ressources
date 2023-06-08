@@ -2,7 +2,6 @@ package qc.ca.creditquebecois.ressources.service;
 
 import qc.ca.creditquebecois.ressources.modele.Compte;
 import qc.ca.creditquebecois.ressources.repository.CompteRepository;
-import qc.ca.creditquebecois.ressources.tools.CreditQuebecoisTools;
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,12 @@ public class BankService {
     private final CompteRepository compteRepository;
     private static final Logger logger = LoggerFactory.getLogger(BankService.class);
 
-    public void creerCompte(String nomDeCompte, double sommeInitiale) {
-        Compte compte = new Compte(nomDeCompte, sommeInitiale);
+    public String creerCompte(String nomDeCompte, double sommeInitiale) {
+        ObjectId idCompteObject = new ObjectId();
+        List listeTransactions = new ArrayList();
+        Compte compte = new Compte(idCompteObject, nomDeCompte, sommeInitiale, listeTransactions);
         compteRepository.save(compte);
+        return compte.getId().toString();
     }
 
     public Compte consulterCompte(String idCompte) {
@@ -28,15 +30,23 @@ public class BankService {
         return compte.get();
     }
 
-    public void ajouterArgent(String idCompte, double sommeAAjouter) {
+    public void ajouterArgent(String idCompte, double sommeAAjouter, String typeTransaction, String titreTransaction) {
         ObjectId idCompteObject = new ObjectId(idCompte);
-        Optional<Compte> compte = compteRepository.findById(idCompteObject);
-        compte.get().ajouter(sommeAAjouter);
+        Optional<Compte> compteOptionnel = compteRepository.findById(idCompteObject);
+        if(compteOptionnel.isPresent()){
+            Compte compte = compteOptionnel.get();
+            compte.ajouter(sommeAAjouter, typeTransaction, titreTransaction);
+            compteRepository.save(compte);
+        }
     }
 
-    public void retirerArgent(String idCompte, double sommeARetirer) {
+    public void retirerArgent(String idCompte, double sommeARetirer, String typeTransaction, String titreTransaction) {
         ObjectId idCompteObject = new ObjectId(idCompte);
-        Optional<Compte> compte = compteRepository.findById(idCompteObject);
-        compte.get().ajouter(sommeARetirer);
+        Optional<Compte> compteOptionnel = compteRepository.findById(idCompteObject);
+        if(compteOptionnel.isPresent()){
+            Compte compte = compteOptionnel.get();
+            compte.retirer(sommeARetirer, typeTransaction, titreTransaction);
+            compteRepository.save(compte);
+        }
     }
 }

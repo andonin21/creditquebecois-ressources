@@ -1,0 +1,32 @@
+###
+POST http://localhost:8080/banque/creerCompte
+Content-Type: application/json
+
+{
+  "nomDeCompte": "CHEVROLLIER COMPTE COURANT",
+  "sommeInitale": 1200.0
+}
+
+###
+GET http://localhost:8080/banque/6482499b739ae9121e5554e0/consulterCompte
+Accept: application/json
+
+###
+POST http://localhost:8080/banque/64824ed13bb3c170dd65111d/ajouterArgent
+Content-Type: application/json
+
+{
+  "somme": 100.50,
+  "typeTransaction": "Virement en votre faveur",
+  "titreTransaction": "Subvention Québec"
+}
+
+###
+POST http://localhost:8080/banque/64824ed13bb3c170dd65111d/retirerArgent
+Content-Type: application/json
+
+{
+  "somme": 200.70,
+  "typeTransaction": "Retrait au distributeur",
+  "titreTransaction": "TALBOT BLVD"
+}
