@@ -1,0 +1,65 @@
+swagger: '2.0'
+info:
+  version: "1.0.0"
+  title: API de Votes et Images
+  description: API pour gérer les votes et les images dans le jeu MemeBattle
+paths:
+  /vote:
+    post:
+      tags : 
+      - Vote
+      summary: Voter pour une image
+      description: Permet à un joueur de voter pour une image dans le jeu
+      parameters:
+        - in: body
+          name: vote
+          description: Informations du vote
+          schema:
+            $ref: "#/definitions/Vote"
+      responses:
+        '200':
+          description: Vote réussi
+        '400':
+          description: Requête invalide
+
+  /classement:
+    get:
+      tags : 
+        - Classement
+      summary: Obtenir le classement des joueurs
+      description: Permet d'actualiser le classement dans le jeu
+      responses:
+        '200':
+          description: Classement récupéré avec succès
+          schema:
+            $ref: "#/definitions/ReponseClassement"
+        '400':
+          description: Requête invalide
+
+definitions:
+  Vote:
+    type: object
+    properties:
+      idImage:
+        type: string
+        description: ID de l'image à voter
+      idJoueur:
+        type: string
+        description: ID du joueur qui effectue le vote
+
+  ReponseClassement:
+    type: object
+    properties:
+      classement:
+        type: array
+        items:
+          type: object
+          properties:
+            pseudo:
+              type: string
+              description: Pseudo du joueur
+              example: wabfall
+            score:
+              type: integer
+              description: Score du joueur
+              example: 800
