@@ -9,7 +9,7 @@ public class Transaction {
     public boolean estNegatif;
     @JsonProperty("montantTransaction")
     public double montantTransaction;
-    //Paiment par carte, Prélèvement, Retrait au distributeur, Virement en votre faveur, Frais, Virement émis
+    //Paiment par carte, Prélèvement, Retrait au distributeur, Virement en votre faveur, Frais, Virement émis, Chèque en votre faveur, Chèque émis
     @JsonProperty("typeTransaction")
     private String typeTransaction;
     @JsonProperty("titreTransaction")

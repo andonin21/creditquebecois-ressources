@@ -3,7 +3,7 @@ package qc.ca.creditquebecois.ressources.modele.api;
 public class CreationCompteAPI {
 
     private String nomDeCompte;
-    private double sommeInitale;
+    private double sommeInitiale;
 
     public String getNomDeCompte() {
         return nomDeCompte;
@@ -13,11 +13,11 @@ public class CreationCompteAPI {
         this.nomDeCompte = nomDeCompte;
     }
 
-    public double getSommeInitale() {
-        return sommeInitale;
+    public Double getSommeInitiale() {
+        return sommeInitiale;
     }
 
-    public void setSommeInitale(double sommeInitale) {
-        this.sommeInitale = sommeInitale;
+    public void setSommeInitiale(int sommeInitale) {
+        this.sommeInitiale = sommeInitale;
     }
 }
