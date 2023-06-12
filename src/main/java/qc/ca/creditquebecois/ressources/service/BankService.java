@@ -21,7 +21,6 @@ public class BankService {
 
     /**
      * Creer compte string.
-     *
      * @param nomDeCompte   nom du compte
      * @param sommeInitiale somme initiale
      * @return string
