@@ -10,12 +10,22 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+/**
+ * The type Bank service.
+ */
 @Service
 @AllArgsConstructor
 public class BankService {
     private final CompteRepository compteRepository;
     private static final Logger logger = LoggerFactory.getLogger(BankService.class);
 
+    /**
+     * Creer compte string.
+     *
+     * @param nomDeCompte   nom du compte
+     * @param sommeInitiale somme initiale
+     * @return string
+     */
     public String creerCompte(String nomDeCompte, double sommeInitiale) {
         ObjectId idCompteObject = new ObjectId();
         List listeTransactions = new ArrayList();
@@ -24,12 +34,26 @@ public class BankService {
         return compte.getId().toString();
     }
 
+    /**
+     * Consulter le compte.
+     *
+     * @param idCompte  id du compte
+     * @return compte
+     */
     public Compte consulterCompte(String idCompte) {
         ObjectId idCompteObject = new ObjectId(idCompte);
         Optional<Compte> compte = compteRepository.findById(idCompteObject);
         return compte.get();
     }
 
+    /**
+     * Ajouter argent.
+     *
+     * @param idCompte         id du compte
+     * @param sommeAAjouter    somme a ajouter
+     * @param typeTransaction  type de la transaction
+     * @param titreTransaction titre de la transaction
+     */
     public void ajouterArgent(String idCompte, double sommeAAjouter, String typeTransaction, String titreTransaction) {
         ObjectId idCompteObject = new ObjectId(idCompte);
         Optional<Compte> compteOptionnel = compteRepository.findById(idCompteObject);
@@ -40,6 +64,14 @@ public class BankService {
         }
     }
 
+    /**
+     * Retirer argent.
+     *
+     * @param idCompte         id du compte
+     * @param sommeARetirer    somme a retirer
+     * @param typeTransaction  type de la transaction
+     * @param titreTransaction titre de la transaction
+     */
     public void retirerArgent(String idCompte, double sommeARetirer, String typeTransaction, String titreTransaction) {
         ObjectId idCompteObject = new ObjectId(idCompte);
         Optional<Compte> compteOptionnel = compteRepository.findById(idCompteObject);

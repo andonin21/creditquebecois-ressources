@@ -8,14 +8,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
+/**
+ * La class MongoDBConfig configure MongoDB
+ */
 @Configuration
 public class MongoDBConfig extends AbstractMongoClientConfiguration {
-
+    /**
+     * Définie le nom de la base de données à laquelle l'application se connectera.
+     * @return
+     */
     @Override
     protected String getDatabaseName() {
         return "creditquebecois";
     }
 
+    /**
+     * Cette méthode crée et configure le client MongoDB utilisant les paramètres spécifiés.
+     * @return
+     */
     @Override
     @Bean
     public MongoClient mongoClient() {

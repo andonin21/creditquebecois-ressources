@@ -16,15 +16,30 @@ import java.util.List;
 public class Compte {
     @Id
     private ObjectId id;
-    // La position courante du compte private
+    /**
+     *  Nom du compte.
+     */
+// La position courante du compte private
     @JsonProperty("nomDeCompte")
     String nomDeCompte;
+    /**
+     *  Solde du compte.
+     */
     @JsonProperty("soldeCompte")
     double soldeCompte;
     @JsonProperty("listeTransactions")
     private List<Transaction> listeTransactions;
 
     // Constructeur
+
+    /**
+     * Instantiates a new Compte.
+     *
+     * @param id                id du compte
+     * @param nomDeCompte       nom du compte
+     * @param soldeCompte       solde du compte
+     * @param listeTransactions liste des transactions
+     */
     public Compte(ObjectId id, String nomDeCompte, double soldeCompte, List<Transaction> listeTransactions) {
         this.id = id;
         this.soldeCompte = soldeCompte;
@@ -32,18 +47,46 @@ public class Compte {
         this.listeTransactions = listeTransactions;
     }
     // ajoute une somme à la position courante // et met à jour la date de dernière opération
+
+    /**
+     * Ajouter.
+     *
+     * @param somme            La somme
+     * @param typeTransaction  le type de la transaction
+     * @param titreTransaction le titre de la transaction
+     */
     public void ajouter(double somme, String typeTransaction, String titreTransaction) {
         soldeCompte += somme;
         this.listeTransactions.add(new Transaction(false, somme, typeTransaction, titreTransaction));
     }
     // retire une somme à la position courante // et met à jour la date de dernière opération
+
+    /**
+     * Retirer.
+     *
+     * @param somme            La somme
+     * @param typeTransaction  le type de la transaction
+     * @param titreTransaction le titre de la transaction
+     */
     public void retirer(double somme, String typeTransaction, String titreTransaction) {
         soldeCompte -= somme;
         this.listeTransactions.add(new Transaction(true, somme, typeTransaction, titreTransaction));
     }
+
+    /**
+     * Gets id.
+     *
+     * @return id
+     */
     public ObjectId getId() {
         return id;
     }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }
